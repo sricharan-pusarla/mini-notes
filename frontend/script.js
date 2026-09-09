@@ -10,6 +10,8 @@ const passwordInput = document.getElementById("passwordInput");
 const registerButton = document.getElementById("registerButton");
 const loginButton = document.getElementById("loginButton");
 
+const API_URL = "https://mini-notes-y5wy.onrender.com";
+
 console.log("Script");
 
 
@@ -25,7 +27,7 @@ button.addEventListener("click", function() {
         return;
     }
 
-    axios.post("http://localhost:5000/notes", {
+    axios.post(API_URL + "/notes", {
         text: input.value
     }, {
         headers: {
@@ -45,7 +47,7 @@ button.addEventListener("click", function() {
             deleteButton.addEventListener("click", function() {
 
                 axios.delete(
-                    "http://localhost:5000/notes/" + response.data._id,
+                    API_URL + "/notes/" + response.data._id,
                     {
                         headers: {
                             Authorization: "Bearer " + token
@@ -80,7 +82,7 @@ button.addEventListener("click", function() {
 // Registers a new user with the username and password entered by the user.
 registerButton.addEventListener("click", function() {
 
-    axios.post("http://localhost:5000/register", {
+    axios.post(API_URL + "/register", {
         username: usernameInput.value,
         password: passwordInput.value
     })
@@ -101,7 +103,7 @@ registerButton.addEventListener("click", function() {
 // Logs the user in and stores the JWT returned by the backend.
 loginButton.addEventListener("click", function() {
 
-    axios.post("http://localhost:5000/login", {
+    axios.post(API_URL + "/login", {
         username: usernameInput.value,
         password: passwordInput.value
     })
@@ -119,7 +121,7 @@ loginButton.addEventListener("click", function() {
             document.body.appendChild(message);
 
 
-            axios.get("http://localhost:5000/notes", {
+            axios.get(API_URL + "/notes", {
                 headers: {
                     Authorization: "Bearer " + token
                 }
@@ -146,7 +148,7 @@ loginButton.addEventListener("click", function() {
                         deleteButton.addEventListener("click", function() {
 
                             axios.delete(
-                                "http://localhost:5000/notes/" + note._id,
+                                API_URL + "/notes/" + note._id,
                                 {
                                     headers: {
                                         Authorization: "Bearer " + token
@@ -180,7 +182,7 @@ loginButton.addEventListener("click", function() {
                                 note.text = input.value;
 
                                 axios.put(
-                                    "http://localhost:5000/notes/" + note._id,
+                                    API_URL + "/notes/" + note._id,
                                     {
                                         text: input.value
                                     },
